@@ -13,11 +13,14 @@ do_compile() {
 
 do_install() {    
     # install to sysdir (testfile will be deployed to rootfs of target)
-    install -d ${D}${bindir}/keys
-    install testfile ${D}${datadir}/keys 
+    install -d ${D}${datadir}/keys
+    install testfile ${D}${datadir}/keys/testfile 
+
 
     # install to sysdir and allow other recipe to read/use the file
     # (will be not deployed to rootfs of target)
     install -d ${D}/sysroot-only/keys
     install secret.key ${D}/sysroot-only/keys
 }
+
+FILES:${PN} += "${datadir}/keys/testfile"
