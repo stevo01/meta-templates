@@ -6,21 +6,25 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 S = "${WORKDIR}"
 
+PACKAGES += "${PN}-sharedfiles ${PN}-key"
+
 do_compile() {
-   echo "1234" > secret.key
-   echo "5678" > testfile
+   echo "1234" > secret.key.001
+   echo "5678" > secret.key.002
 }
 
 do_install() {    
-    # install to sysdir (testfile will be deployed to rootfs of target)
-    install -d ${D}${datadir}/keys
-    install testfile ${D}${datadir}/keys/testfile 
 
+    # install to libdir (secret.key.001 will be deployed to rootfs of target)
+    install -d ${D}${libdir}/keys
+    install secret.key.001 ${D}${libdir}/keys
 
-    # install to sysdir and allow other recipe to read/use the file
+    # install to datadir and allow other recipe to read/use the file
     # (will be not deployed to rootfs of target)
-    install -d ${D}/sysroot-only/keys
-    install secret.key ${D}/sysroot-only/keys
+    install -d ${D}${datadir_native}/keys
+    install secret.key.002 ${D}${datadir_native}/keys
 }
 
-FILES:${PN} += "${datadir}/keys/testfile"
+FILES_${PN}-key += "${libdir}/keys/secret.key.001"
+FILES_${PN}-sharedfiles += "${datadir_native}/keys/secret.key.002"
+
