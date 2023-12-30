@@ -53,6 +53,10 @@ tmp-glibc/work/core2-64-oe-linux/generate-key-sample/0.1-r0/package/usr/share/ke
 - STAGING_DATADIR
 - STAGING_BASELIBDIR
 - STAGING_LIBDIR
+- STAGING_DIR_TARGET
+- STAGING_DIR_NATIVE
+- STAGING_DIR_HOST
+
 
 ## relevant tasks
 - do_populate_sysroot
