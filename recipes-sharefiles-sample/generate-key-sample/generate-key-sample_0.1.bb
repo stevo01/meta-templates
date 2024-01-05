@@ -25,6 +25,6 @@ do_install() {
     install secret.key.002 ${D}${datadir_native}/keys
 }
 
-FILES_${PN}-key += "${libdir}/keys/secret.key.001"
-FILES_${PN}-sharedfiles += "${datadir_native}/keys/secret.key.002"
+FILES:${PN}-key += "${libdir}/keys/secret.key.001"
+FILES:${PN}-sharedfiles += "${datadir_native}/keys/secret.key.002"
 
