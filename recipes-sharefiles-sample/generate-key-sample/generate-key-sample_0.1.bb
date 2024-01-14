@@ -14,17 +14,16 @@ do_compile() {
 }
 
 do_install() {    
-
     # install to libdir (secret.key.001 will be deployed to rootfs of target)
     install -d ${D}${libdir}/keys
     install secret.key.001 ${D}${libdir}/keys
 
     # install to datadir and allow other recipe to read/use the file
     # (will be not deployed to rootfs of target)
-    install -d ${D}${datadir_native}/keys
-    install secret.key.002 ${D}${datadir_native}/keys
+    install -d ${D}${datadir}/keys
+    install secret.key.002 ${D}${datadir}/keys
 }
 
 FILES_${PN}-key += "${libdir}/keys/secret.key.001"
-FILES_${PN}-sharedfiles += "${datadir_native}/keys/secret.key.002"
+FILES_${PN}-sharedfiles += "${datadir}/keys/secret.key.002"
 
